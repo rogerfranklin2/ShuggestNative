@@ -27,6 +27,7 @@ var Login = React.createClass({
               if (result.isCanceled) {
                 alert('Login cancelled.');
               } else {
+                alert(result.credentials )
                 this.props.navigator.replace({id: 'user-info'});
               }
             }

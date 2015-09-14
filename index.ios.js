@@ -5,8 +5,8 @@
 'use strict';
 
 var React = require('react-native');
-var Login = require('./components/Login.react.js');
-var Shuggestions = require('./components/Shuggestions.react');
+var Login = require('./App/components/Login.react.js');
+var Shuggestions = require('./App/components/Shuggestions.react');
 
 var {
   AppRegistry,
