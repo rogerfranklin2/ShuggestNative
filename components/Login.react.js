@@ -18,7 +18,7 @@ var {
 var Login = React.createClass({
   render: function() {
     return (
-      <View>
+      <View style={styles.loginContainer}>
         <FBSDKLoginButton
           onLoginFinished={(error, result) => {
             if (error) {
@@ -37,6 +37,19 @@ var Login = React.createClass({
       </View>
     );
   }
+});
+
+var styles = StyleSheet.create({
+  loginContainer: {
+    marginTop: 150,
+
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  bottomBump: {
+    marginBottom: 15,
+  },
 });
 
 module.exports = Login;
