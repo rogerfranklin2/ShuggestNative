@@ -2,6 +2,8 @@
 var React = require('react-native');
 var Shuggestions = require('./ShuggestionsList.react');
 
+var UserStore = require('../stores/UserStore');
+
 var {
   AppRegistry,
   StyleSheet,
@@ -14,6 +16,23 @@ var {
 } = React;
 
 var Login = React.createClass({
+  getInitialState: function() {
+    return UserStore.getState();
+  },
+    
+  componentDidMount() {
+    UserStore.listen(this.onChange);
+  },
+
+  componentWillUnmount() {
+    UserStore.unlisten(this.onChange);
+  },
+
+  onChange(state) {
+    this.setState(state);
+  },
+  
+  
   render: function() {
 
   
@@ -23,6 +42,7 @@ var Login = React.createClass({
           <View style={styles.imageContainer}>
             <Image source={{uri: 'http://shuggest.com/images/logo.jpg'}} style={styles.image} />
           </View>
+          <Text>{ this.state }</Text>
           
           <View style={ styles.suggestionContainer }>
             <Text>Shuggestions for you</Text>

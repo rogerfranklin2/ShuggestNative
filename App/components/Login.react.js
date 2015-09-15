@@ -1,6 +1,13 @@
 'use strict';
 var React = require('react-native');
 var FBSDKLogin = require('react-native-fbsdklogin');
+var FBSDKCore = require('react-native-fbsdkcore');
+var {
+  FBSDKGraphRequest,
+} = FBSDKCore;
+
+var UserActions = require('../actions/UserActions');
+
 
 var {
   AppRegistry,
@@ -27,7 +34,6 @@ var Login = React.createClass({
               if (result.isCanceled) {
                 alert('Login cancelled.');
               } else {
-                alert(result.credentials )
                 this.props.navigator.replace({id: 'user-info'});
               }
             }
