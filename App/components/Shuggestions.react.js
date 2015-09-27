@@ -20,6 +20,9 @@ var Login = React.createClass({
     return UserStore.getState();
   },
     
+  componentWillMount(){
+  },
+    
   componentDidMount() {
     UserStore.listen(this.onChange);
   },
@@ -33,9 +36,7 @@ var Login = React.createClass({
   },
   
   
-  render: function() {
-
-  
+  render() {
     return (
       <View>
         <View style={styles.wrapper}>

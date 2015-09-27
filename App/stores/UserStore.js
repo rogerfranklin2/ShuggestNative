@@ -11,6 +11,7 @@ class UserStore {
   }
 
   handleLogin(res) {
+    conosole.log("HANDLE LOGIN", res);
     this.res = res;
   }
 }
