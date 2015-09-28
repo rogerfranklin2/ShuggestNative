@@ -7,6 +7,7 @@
 var React = require('react-native');
 var Login = require('./App/components/Login.react.js');
 var Shuggestions = require('./App/components/Shuggestions.react');
+var Home = require('./App/components/Home.react');
 
 var {
   AppRegistry,
@@ -28,7 +29,7 @@ var Shuggest = React.createClass({
       case 'authenticate':
         return <Login navigator={nav} />;
       case 'user-info':
-        return <Shuggestions navigator={nav} />;
+        return <Home />;
       default:
         return <View />;
     }
