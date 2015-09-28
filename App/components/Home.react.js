@@ -2,6 +2,7 @@
 var React = require('react-native');
 
 var Shuggestions = require('./Shuggestions.react')
+var MakeShuggestion = require('./MakeShuggestion.react')
 
 var {
   AppRegistry,
@@ -44,9 +45,7 @@ var Home = React.createClass({
             selected={this.state.selectedTab == 'suggest'}
             onPress={() => this.setState({selectedTab : 'suggest'})}
           >
-            <View>
-              <Text>Form to add suggestion</Text>
-            </View>
+            <MakeShuggestion />
           </TabBarIOS.Item>
         </TabBarIOS>
     );
