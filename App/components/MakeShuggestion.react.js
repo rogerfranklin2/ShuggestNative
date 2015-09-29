@@ -30,10 +30,17 @@ var MakeShuggestion = React.createClass({
           </View>
         </View>
         <View>
+          <Text>I want to share a</Text>
           <TextInput
             style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            value="BLAH"
+            value="movie"
           />
+          <Text>Your suggestion</Text>
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            value="Suggestion"
+          />
+              
         </View>
       </View>
     );
