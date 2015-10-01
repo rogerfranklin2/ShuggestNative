@@ -32,6 +32,8 @@ class ShuggestForm extends React.Component {
   	super()
 		this.state = {
 			suggestion: "",
+            url: "",
+            showPrediction: false,
   		friend: {
   				name: "friend",
   				id: null
@@ -63,6 +65,24 @@ class ShuggestForm extends React.Component {
     
     return [{name:"John", id: "1"},{name: "geoff",id:"2"},{name: "kevin",id: 3}, {name: "paul", id: 4}, {name: "keith", id: 5}]
   }
+
+  showPrediction(){
+    this.setState({showPrediction: true})
+  }
+
+  hidePrediction(){
+    this.setState({showPrediction: false})
+  }
+  
+  renderPredictions(){
+    if(this.state.showPrediction){
+      return (
+        <View>
+          <Text>Prediction text, map over results</Text>
+        </View>
+      )
+    }
+  }
   
   render() {
     return (
@@ -75,6 +95,16 @@ class ShuggestForm extends React.Component {
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(suggestion) => this.setState({suggestion: suggestion})}
           value={this.state.suggestion}
+          onFocus={() => this.showPrediction()}
+          onEndEditing={() => this.hidePrediction()}
+        />
+        
+        {this.renderPredictions()}
+
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={(url) => this.setState({url: url})}
+          value={this.state.url}
         />
         
         <Text>To who?</Text>
