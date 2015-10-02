@@ -90,19 +90,22 @@ class ShuggestForm extends React.Component {
 
   findPredictions(suggestion){
     this.setState({suggestion: suggestion})
+    if (suggestion != ""){
+      
 
-    var query = suggestion.toLowerCase().replace(/ /g, '%20');    
-    var queryURL = "http://api.themoviedb.org/3/search/movie?api_key=12e033ccbcfb53775ecd230412f199ec&query=" + query + "&search_type=ngram"
+      var query = suggestion.toLowerCase().replace(/ /g, '%20');    
+      var queryURL = "http://api.themoviedb.org/3/search/movie?api_key=12e033ccbcfb53775ecd230412f199ec&query=" + query + "&search_type=ngram"
 
-    fetch(queryURL)
-    .then((response) => response.json())
-    .then((responseData) => {
-      this.setState({autoCompleteResponse: responseData.results})
-    })
-    .catch(error => {
-      alert(error);
-    })
-    .done();
+      fetch(queryURL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({autoCompleteResponse: responseData.results})
+      })
+      .catch(error => {
+        alert(error);
+      })
+      .done();
+    }
   }
   
   render() {
