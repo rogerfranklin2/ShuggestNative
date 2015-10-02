@@ -33,6 +33,7 @@ class ShuggestForm extends React.Component {
 		this.state = {
 			suggestion: "",
             url: "",
+            autoCompleteResponse: "",
             showPrediction: false,
   		friend: {
   				name: "friend",
@@ -75,13 +76,33 @@ class ShuggestForm extends React.Component {
   }
   
   renderPredictions(){
-    if(this.state.showPrediction){
+    if(this.state.autoCompleteResponse[0]){
       return (
         <View>
-          <Text>Prediction text, map over results</Text>
+          <Text>{this.state.autoCompleteResponse[0] ? this.state.autoCompleteResponse[0].original_title : null }</Text>
+          <Text>{this.state.autoCompleteResponse[1] ? this.state.autoCompleteResponse[1].original_title : null }</Text>
+          <Text>{this.state.autoCompleteResponse[2] ? this.state.autoCompleteResponse[2].original_title : null }</Text>
+          <Text>{this.state.autoCompleteResponse[3] ? this.state.autoCompleteResponse[3].original_title : null }</Text>
         </View>
       )
     }
+  }
+
+  findPredictions(suggestion){
+    this.setState({suggestion: suggestion})
+
+    var query = suggestion.toLowerCase().replace(/ /g, '%20');    
+    var queryURL = "http://api.themoviedb.org/3/search/movie?api_key=12e033ccbcfb53775ecd230412f199ec&query=" + query + "&search_type=ngram"
+
+    fetch(queryURL)
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState({autoCompleteResponse: responseData.results})
+    })
+    .catch(error => {
+      alert(error);
+    })
+    .done();
   }
   
   render() {
@@ -93,7 +114,7 @@ class ShuggestForm extends React.Component {
   			<Text>Your suggestion</Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(suggestion) => this.setState({suggestion: suggestion})}
+          onChangeText={(suggestion) => this.findPredictions(suggestion)}
           value={this.state.suggestion}
           onFocus={() => this.showPrediction()}
           onEndEditing={() => this.hidePrediction()}
@@ -101,13 +122,15 @@ class ShuggestForm extends React.Component {
         
         {this.renderPredictions()}
 
+
+        <Text>To who?</Text>
         <TextInput
           style={{height: 40, borderColor: 'gray', borderWidth: 1}}
           onChangeText={(url) => this.setState({url: url})}
           value={this.state.url}
         />
         
-        <Text>To who?</Text>
+        
         <PickerIOS
           selectedValue="Blah"
           onValueChange={(carMake) => this.setState({friend: carMake})}>
@@ -120,9 +143,6 @@ class ShuggestForm extends React.Component {
             )
           )}
         </PickerIOS>
-        
-        
-        
 
       </View>
     );
